@@ -1,4 +1,4 @@
-import { IPacientsRepository } from '../repositories/IPacientsRepository';
+import { IPacientsRepository } from '../../repositories/IPacientsRepository';
 
 interface IRequest {
   nome: string;
@@ -8,7 +8,7 @@ interface IRequest {
   dataNascimento: Date;
 }
 
-class CreatePacientService {
+class CreatePacientUseCase {
   constructor(private pacientsRepository: IPacientsRepository) {}
   execute({ nome, cpf, email, genero, dataNascimento }: IRequest): void {
     const pacientNameAlreadyExists = this.pacientsRepository.findByName(nome);
@@ -33,4 +33,4 @@ class CreatePacientService {
   }
 }
 
-export { CreatePacientService };
+export { CreatePacientUseCase };

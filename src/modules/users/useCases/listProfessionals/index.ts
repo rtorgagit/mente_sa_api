@@ -1,5 +1,5 @@
 import { ProfessionalsRepository } from '../../repositories/implementations/ProfessionalsRepository';
-import { ListProfessionalsController } from './ListProfessionalsControler';
+import { ListProfessionalsController } from './ListProfessionalsController';
 import { ListProfessionalsUseCase } from './ListProfessionalsUseCase';
 
 const professionalsRepository = ProfessionalsRepository.getInstance();

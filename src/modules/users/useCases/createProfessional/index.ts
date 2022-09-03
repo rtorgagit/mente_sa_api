@@ -7,8 +7,8 @@ const createProfessionalUseCase = new CreateProfessionalUseCase(
   professionalsRepository,
 );
 
-const createProfessionalControler = new CreateProfessionalControler(
+const createProfessionalController = new CreateProfessionalControler(
   createProfessionalUseCase,
 );
 
-export { createProfessionalControler };
+export { createProfessionalController };
