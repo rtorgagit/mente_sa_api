@@ -1,14 +1,23 @@
-import { Professional } from '../model/Professional';
+import { Professional } from '../../model/Professional';
 import {
   ICreateProfessionalDTO,
   IProfessionalsRepository,
-} from './IProfessionalsRepository';
+} from '../IProfessionalsRepository';
 
 class ProfessionalsRepository implements IProfessionalsRepository {
   private professionals: Professional[];
 
-  constructor() {
+  private static INSTANCE: ProfessionalsRepository;
+
+  private constructor() {
     this.professionals = [];
+  }
+
+  public static getInstance(): ProfessionalsRepository {
+    if (!ProfessionalsRepository.INSTANCE) {
+      ProfessionalsRepository.INSTANCE = new ProfessionalsRepository();
+    }
+    return ProfessionalsRepository.INSTANCE;
   }
 
   create({ nome, crp, abordagem, contato }: ICreateProfessionalDTO): void {

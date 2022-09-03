@@ -1,4 +1,4 @@
-import { IProfessionalsRepository } from '../repositories/IProfessionalsRepository';
+import { IProfessionalsRepository } from '../../repositories/IProfessionalsRepository';
 
 interface IRequest {
   nome: string;
@@ -7,8 +7,9 @@ interface IRequest {
   contato: string;
 }
 
-class CreateProfessionalService {
+class CreateProfessionalUseCase {
   constructor(private professionalsRepository: IProfessionalsRepository) {}
+
   execute({ nome, crp, abordagem, contato }: IRequest): void {
     const professionalNameAlreadyExists =
       this.professionalsRepository.findByName(nome);
@@ -33,4 +34,4 @@ class CreateProfessionalService {
   }
 }
 
-export { CreateProfessionalService };
+export { CreateProfessionalUseCase };

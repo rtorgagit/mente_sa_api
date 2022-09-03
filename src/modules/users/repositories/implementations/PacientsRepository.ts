@@ -1,5 +1,5 @@
-import { Pacient } from '../model/Pacient';
-import { ICreatePacientDTO, IPacientsRepository } from './IPacientsRepository';
+import { Pacient } from '../../model/Pacient';
+import { ICreatePacientDTO, IPacientsRepository } from '../IPacientsRepository';
 
 class PacientsRepository implements IPacientsRepository {
   private pacients: Pacient[];

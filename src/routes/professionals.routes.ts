@@ -1,26 +1,16 @@
 import { Router } from 'express';
 
-import { ProfessionalsRepository } from '../modules/users/repositories/ProfessionalsRepository';
-import { CreateProfessionalService } from '../modules/users/services/CreateProfessionalService';
+import { createProfessionalControler } from '../modules/users/useCases/createProfessional';
+import { listProfessionalsController } from '../modules/users/useCases/listProfessionals';
 
 const professionalsRoutes = Router();
-const professionalsRepository = new ProfessionalsRepository();
 
 professionalsRoutes.post('/', (request, response) => {
-  const { nome, crp, abordagem, contato } = request.body;
-  const createProfessionalService = new CreateProfessionalService(
-    professionalsRepository,
-  );
-
-  createProfessionalService.execute({ nome, crp, abordagem, contato });
-
-  return response.status(201).send();
+  return createProfessionalControler.handle(request, response);
 });
 
 professionalsRoutes.get('/', (request, response) => {
-  const allProfessionals = professionalsRepository.list();
-
-  response.status(200).json(allProfessionals);
+  return listProfessionalsController.handle(request, response);
 });
 
 export { professionalsRoutes };
