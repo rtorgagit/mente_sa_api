@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
 
-import { CreatePacientUseCase } from './CreatePacientUseCase';
+import { CreatePatientUseCase } from './CreatePatientUseCase';
 
-class CreatePacientController {
-  constructor(private createPacientUseCase: CreatePacientUseCase) {}
+class CreatePatientController {
+  constructor(private createPatientUseCase: CreatePatientUseCase) {}
 
   handle(request: Request, response: Response): Response {
     const { nome, cpf, email, genero, dataNascimento } = request.body;
 
-    this.createPacientUseCase.execute({
+    this.createPatientUseCase.execute({
       nome,
       cpf,
       email,
@@ -20,4 +20,4 @@ class CreatePacientController {
   }
 }
 
-export { CreatePacientController };
+export { CreatePatientController };

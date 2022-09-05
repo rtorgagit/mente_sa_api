@@ -79,7 +79,7 @@
         }
       }
     },
-    "/pacients":{
+    "/patients":{
       "post": {
         "tags": ["Patient"],
         "summary": "Create a patient",

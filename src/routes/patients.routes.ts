@@ -1,19 +1,19 @@
 import { Router } from 'express';
 
-import { PacientsRepository } from '../modules/users/repositories/implementations/PacientsRepository';
-import { createPacientController } from '../modules/users/useCases/createPacient';
+import { PatientsRepository } from '../modules/users/repositories/implementations/PatientsRepository';
+import { createPatientController } from '../modules/users/useCases/createPatient';
 
-const pacientRoutes = Router();
-const pacientsRepository = PacientsRepository.getInstance();
+const patientRoutes = Router();
+const patientsRepository = PatientsRepository.getInstance();
 
-pacientRoutes.post('/', (request, response) => {
-  return createPacientController.handle(request, response);
+patientRoutes.post('/', (request, response) => {
+  return createPatientController.handle(request, response);
 });
 
-pacientRoutes.get('/', (request, response) => {
-  const allPacients = pacientsRepository.list();
+patientRoutes.get('/', (request, response) => {
+  const allPatients = patientsRepository.list();
 
-  response.status(200).json(allPacients);
+  response.status(200).json(allPatients);
 });
 
-export { pacientRoutes };
+export { patientRoutes };
