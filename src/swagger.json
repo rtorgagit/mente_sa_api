@@ -1,0 +1,157 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mente Sã Documentation",
+    "description": "This is an API to schedulle psicologist sessions",
+    "version": "1.0.0",
+    "contact": {
+      "email": "rtorga@gmail.com"
+    }
+  },
+  "paths": {
+    "/professionals":{
+      "post": {
+        "tags": ["Professional"],
+        "summary": "Create a professional",
+        "description": "Create a new professional",
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "type":"object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "nome": "Professional sample",
+                  "crp":"Professional crp sample",
+                  "abordagem":"Professional style sample",
+                  "contato":"Professional contact sample"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Professional already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Professional"],
+        "summary": "List all professionals",
+        "description": "List all professionals",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "nome": {
+                      "type": "string"
+                    },
+                    "crp": {
+                      "type": "string"
+                    },
+                    "abordagem": {
+                      "type": "string"
+                    },
+                    "contato": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pacients":{
+      "post": {
+        "tags": ["Patient"],
+        "summary": "Create a patient",
+        "description": "Create a new patient",
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "type":"object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "nome": "Patient sample",
+                  "cpf":"Patient CPF sample",
+                  "email":"Patient email sample",
+                  "genero":"Patient gender sample",
+                  "dataNascimento":"Patient date of birth sample"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Patient already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Patient"],
+        "summary": "List all patients",
+        "description": "List all patients",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "nome": {
+                      "type": "string"
+                    },
+                    "cpf": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "genero": {
+                      "type": "string"
+                    },
+                    "dataNascimento": {
+                      "type": "date"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
