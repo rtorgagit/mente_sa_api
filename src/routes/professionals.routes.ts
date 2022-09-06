@@ -1,16 +1,15 @@
 import { Router } from 'express';
 
-import createProfessionalController from '../modules/users/useCases/createProfessional';
-import listProfessionalsController from '../modules/users/useCases/listProfessionals';
+import { CreateProfessionalController } from '../modules/users/useCases/createProfessional/CreateProfessionalController';
+import { ListProfessionalsController } from '../modules/users/useCases/listProfessionals/ListProfessionalsController';
 
 const professionalsRoutes = Router();
 
-professionalsRoutes.post('/', (request, response) => {
-  return createProfessionalController().handle(request, response);
-});
+const createProfessionalController = new CreateProfessionalController();
+const listProfessionalsController = new ListProfessionalsController();
 
-professionalsRoutes.get('/', (request, response) => {
-  return listProfessionalsController().handle(request, response);
-});
+professionalsRoutes.post('/', createProfessionalController.handle);
+
+professionalsRoutes.get('/', listProfessionalsController.handle);
 
 export { professionalsRoutes };

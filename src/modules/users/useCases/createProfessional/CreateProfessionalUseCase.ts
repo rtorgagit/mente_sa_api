@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+
 import { IProfessionalsRepository } from '../../repositories/IProfessionalsRepository';
 
 interface IRequest {
@@ -7,8 +9,12 @@ interface IRequest {
   contato: string;
 }
 
+@injectable()
 class CreateProfessionalUseCase {
-  constructor(private professionalsRepository: IProfessionalsRepository) {}
+  constructor(
+    @inject('ProfessionalsRepository')
+    private professionalsRepository: IProfessionalsRepository,
+  ) {}
 
   async execute({ nome, crp, abordagem, contato }: IRequest): Promise<void> {
     const professionalNameAlreadyExists =

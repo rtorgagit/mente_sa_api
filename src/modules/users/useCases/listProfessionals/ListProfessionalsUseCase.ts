@@ -1,8 +1,14 @@
+import { inject, injectable } from 'tsyringe';
+
 import { Professional } from '../../entities/Professional';
 import { IProfessionalsRepository } from '../../repositories/IProfessionalsRepository';
 
+@injectable()
 class ListProfessionalsUseCase {
-  constructor(private professionalsRepository: IProfessionalsRepository) {}
+  constructor(
+    @inject('ProfessionalsRepository')
+    private professionalsRepository: IProfessionalsRepository,
+  ) {}
 
   async execute(): Promise<Professional[]> {
     const allProfessionals = await this.professionalsRepository.list();

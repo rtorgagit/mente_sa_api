@@ -1,14 +1,17 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
 import { CreateProfessionalUseCase } from './CreateProfessionalUseCase';
 
 class CreateProfessionalController {
-  constructor(private createProfessionalUseCase: CreateProfessionalUseCase) {}
-
   async handle(request: Request, response: Response): Promise<Response> {
     const { nome, crp, abordagem, contato } = request.body;
 
-    await this.createProfessionalUseCase.execute({
+    const createProfessionalUseCase = container.resolve(
+      CreateProfessionalUseCase,
+    );
+
+    await createProfessionalUseCase.execute({
       nome,
       crp,
       abordagem,

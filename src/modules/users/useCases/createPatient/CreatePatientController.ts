@@ -1,14 +1,15 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
 import { CreatePatientUseCase } from './CreatePatientUseCase';
 
 class CreatePatientController {
-  constructor(private createPatientUseCase: CreatePatientUseCase) {}
-
   async handle(request: Request, response: Response): Promise<Response> {
     const { nome, cpf, email, genero, dataNascimento } = request.body;
 
-    await this.createPatientUseCase.execute({
+    const createPatientUseCase = container.resolve(CreatePatientUseCase);
+
+    await createPatientUseCase.execute({
       nome,
       cpf,
       email,

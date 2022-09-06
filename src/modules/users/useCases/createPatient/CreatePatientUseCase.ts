@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+
 import { IPatientsRepository } from '../../repositories/IPatientsRepository';
 
 interface IRequest {
@@ -8,8 +10,12 @@ interface IRequest {
   dataNascimento: Date;
 }
 
+@injectable()
 class CreatePatientUseCase {
-  constructor(private patientsRepository: IPatientsRepository) {}
+  constructor(
+    @inject('PatientsRepository')
+    private patientsRepository: IPatientsRepository,
+  ) {}
   async execute({
     nome,
     cpf,
