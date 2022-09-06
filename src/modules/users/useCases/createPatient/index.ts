@@ -2,10 +2,12 @@ import { PatientsRepository } from '../../repositories/implementations/PatientsR
 import { CreatePatientController } from './CreatePatientController';
 import { CreatePatientUseCase } from './CreatePatientUseCase';
 
-const patientsRepository = PatientsRepository.getInstance();
-const createPatientUseCase = new CreatePatientUseCase(patientsRepository);
-const createPatientController = new CreatePatientController(
-  createPatientUseCase,
-);
+export default (): CreatePatientController => {
+  const patientsRepository = new PatientsRepository();
+  const createPatientUseCase = new CreatePatientUseCase(patientsRepository);
+  const createPatientController = new CreatePatientController(
+    createPatientUseCase,
+  );
 
-export { createPatientController };
+  return createPatientController;
+};

@@ -1,11 +1,11 @@
-import { Patient } from '../../model/Patient';
+import { Patient } from '../../entities/Patient';
 import { IPatientsRepository } from '../../repositories/IPatientsRepository';
 
 class ListPatientsUseCase {
   constructor(private patientsRepository: IPatientsRepository) {}
 
-  execute(): Patient[] {
-    const allPatients = this.patientsRepository.list();
+  async execute(): Promise<Patient[]> {
+    const allPatients = await this.patientsRepository.list();
 
     return allPatients;
   }

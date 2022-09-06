@@ -1,4 +1,4 @@
-import { Patient } from '../model/Patient';
+import { Patient } from '../entities/Patient';
 
 interface ICreatePatientDTO {
   nome: string;
@@ -9,10 +9,16 @@ interface ICreatePatientDTO {
 }
 
 interface IPatientsRepository {
-  create({ nome, cpf, email, genero, dataNascimento }: ICreatePatientDTO): void;
-  list(): Patient[];
-  findByName(nome: string): Patient;
-  findByCpf(cpf: string): Patient;
+  create({
+    nome,
+    cpf,
+    email,
+    genero,
+    dataNascimento,
+  }: ICreatePatientDTO): Promise<void>;
+  list(): Promise<Patient[]>;
+  findByName(nome: string): Promise<Patient>;
+  findByCpf(cpf: string): Promise<Patient>;
 }
 
 export { IPatientsRepository, ICreatePatientDTO };

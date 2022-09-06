@@ -1,53 +1,46 @@
-import { Professional } from '../../model/Professional';
+import { getRepository, Repository } from 'typeorm';
+
+import { Professional } from '../../entities/Professional';
 import {
   ICreateProfessionalDTO,
   IProfessionalsRepository,
 } from '../IProfessionalsRepository';
 
 class ProfessionalsRepository implements IProfessionalsRepository {
-  private professionals: Professional[];
+  private repository: Repository<Professional>;
 
-  private static INSTANCE: ProfessionalsRepository;
-
-  private constructor() {
-    this.professionals = [];
+  constructor() {
+    this.repository = getRepository(Professional);
   }
 
-  public static getInstance(): ProfessionalsRepository {
-    if (!ProfessionalsRepository.INSTANCE) {
-      ProfessionalsRepository.INSTANCE = new ProfessionalsRepository();
-    }
-    return ProfessionalsRepository.INSTANCE;
-  }
-
-  create({ nome, crp, abordagem, contato }: ICreateProfessionalDTO): void {
-    const professional = new Professional();
-    Object.assign(professional, {
+  async create({
+    nome,
+    crp,
+    abordagem,
+    contato,
+  }: ICreateProfessionalDTO): Promise<void> {
+    const professional = this.repository.create({
       nome,
       crp,
       abordagem,
       contato,
-      created_at: new Date(),
     });
 
-    this.professionals.push(professional);
+    await this.repository.save(professional);
   }
 
-  list(): Professional[] {
-    return this.professionals;
+  async list(): Promise<Professional[]> {
+    const professionals = await this.repository.find();
+    return professionals;
   }
 
-  findByName(nome: string): Professional {
-    const professional = this.professionals.find(
-      professional => professional.nome === nome,
-    );
+  async findByName(nome: string): Promise<Professional> {
+    const professional = await this.repository.findOne({ nome });
     return professional;
   }
 
-  findByCrp(crp: string): Professional {
-    const professional = this.professionals.find(
-      professional => professional.crp === crp,
-    );
+  async findByCrp(crp: string): Promise<Professional> {
+    const professional = await this.repository.findOne({ crp });
     return professional;
   }
 }

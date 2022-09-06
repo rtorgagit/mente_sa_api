@@ -1,11 +1,11 @@
-import { Professional } from '../../model/Professional';
+import { Professional } from '../../entities/Professional';
 import { IProfessionalsRepository } from '../../repositories/IProfessionalsRepository';
 
 class ListProfessionalsUseCase {
   constructor(private professionalsRepository: IProfessionalsRepository) {}
 
-  execute(): Professional[] {
-    const allProfessionals = this.professionalsRepository.list();
+  async execute(): Promise<Professional[]> {
+    const allProfessionals = await this.professionalsRepository.list();
 
     return allProfessionals;
   }

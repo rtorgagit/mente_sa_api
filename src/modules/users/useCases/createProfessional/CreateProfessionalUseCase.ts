@@ -10,22 +10,22 @@ interface IRequest {
 class CreateProfessionalUseCase {
   constructor(private professionalsRepository: IProfessionalsRepository) {}
 
-  execute({ nome, crp, abordagem, contato }: IRequest): void {
+  async execute({ nome, crp, abordagem, contato }: IRequest): Promise<void> {
     const professionalNameAlreadyExists =
-      this.professionalsRepository.findByName(nome);
+      await this.professionalsRepository.findByName(nome);
 
     if (professionalNameAlreadyExists) {
       throw new Error('Profissional já cadastrado!');
     }
 
     const professionalCrpAlreadyExists =
-      this.professionalsRepository.findByCrp(crp);
+      await this.professionalsRepository.findByCrp(crp);
 
     if (professionalCrpAlreadyExists) {
       throw new Error('Profissional já cadastrado!');
     }
 
-    this.professionalsRepository.create({
+    await this.professionalsRepository.create({
       nome,
       crp,
       abordagem,

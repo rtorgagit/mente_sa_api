@@ -1,53 +1,45 @@
-import { Patient } from '../../model/Patient';
+import { getRepository, Repository } from 'typeorm';
+
+import { Patient } from '../../entities/Patient';
 import { ICreatePatientDTO, IPatientsRepository } from '../IPatientsRepository';
 
 class PatientsRepository implements IPatientsRepository {
-  private patients: Patient[];
+  private repository: Repository<Patient>;
 
-  private static INSTANCE: PatientsRepository;
-
-  private constructor() {
-    this.patients = [];
+  constructor() {
+    this.repository = getRepository(Patient);
   }
 
-  public static getInstance(): PatientsRepository {
-    if (!PatientsRepository.INSTANCE) {
-      PatientsRepository.INSTANCE = new PatientsRepository();
-    }
-    return PatientsRepository.INSTANCE;
-  }
-
-  create({
+  async create({
     nome,
     cpf,
     email,
     genero,
     dataNascimento,
-  }: ICreatePatientDTO): void {
-    const patient = new Patient();
-    Object.assign(patient, {
+  }: ICreatePatientDTO): Promise<void> {
+    const patient = this.repository.create({
       nome,
       cpf,
       email,
       genero,
       dataNascimento,
-      created_at: new Date(),
     });
 
-    this.patients.push(patient);
+    await this.repository.save(patient);
   }
 
-  list(): Patient[] {
-    return this.patients;
+  async list(): Promise<Patient[]> {
+    const patients = await this.repository.find();
+    return patients;
   }
 
-  findByName(nome: string): Patient {
-    const patient = this.patients.find(patient => patient.nome === nome);
+  async findByName(nome: string): Promise<Patient> {
+    const patient = await this.repository.findOne({ nome });
     return patient;
   }
 
-  findByCpf(cpf: string): Patient {
-    const patient = this.patients.find(patient => patient.cpf === cpf);
+  async findByCpf(cpf: string): Promise<Patient> {
+    const patient = await this.repository.findOne({ cpf });
     return patient;
   }
 }

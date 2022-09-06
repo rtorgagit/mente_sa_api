@@ -5,10 +5,10 @@ import { CreatePatientUseCase } from './CreatePatientUseCase';
 class CreatePatientController {
   constructor(private createPatientUseCase: CreatePatientUseCase) {}
 
-  handle(request: Request, response: Response): Response {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { nome, cpf, email, genero, dataNascimento } = request.body;
 
-    this.createPatientUseCase.execute({
+    await this.createPatientUseCase.execute({
       nome,
       cpf,
       email,

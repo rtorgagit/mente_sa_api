@@ -1,4 +1,4 @@
-import { Professional } from '../model/Professional';
+import { Professional } from '../entities/Professional';
 
 interface ICreateProfessionalDTO {
   nome: string;
@@ -8,10 +8,15 @@ interface ICreateProfessionalDTO {
 }
 
 interface IProfessionalsRepository {
-  create({ nome, crp, abordagem, contato }: ICreateProfessionalDTO): void;
-  list(): Professional[];
-  findByName(nome: string): Professional;
-  findByCrp(crp: string): Professional;
+  create({
+    nome,
+    crp,
+    abordagem,
+    contato,
+  }: ICreateProfessionalDTO): Promise<void>;
+  list(): Promise<Professional[]>;
+  findByName(nome: string): Promise<Professional>;
+  findByCrp(crp: string): Promise<Professional>;
 }
 
 export { IProfessionalsRepository, ICreateProfessionalDTO };

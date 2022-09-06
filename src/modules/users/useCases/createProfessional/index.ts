@@ -1,14 +1,16 @@
 import { ProfessionalsRepository } from '../../repositories/implementations/ProfessionalsRepository';
-import { CreateProfessionalControler } from './CreateProfessionalController';
+import { CreateProfessionalController } from './CreateProfessionalController';
 import { CreateProfessionalUseCase } from './CreateProfessionalUseCase';
 
-const professionalsRepository = ProfessionalsRepository.getInstance();
-const createProfessionalUseCase = new CreateProfessionalUseCase(
-  professionalsRepository,
-);
+export default (): CreateProfessionalController => {
+  const professionalsRepository = new ProfessionalsRepository();
+  const createProfessionalUseCase = new CreateProfessionalUseCase(
+    professionalsRepository,
+  );
 
-const createProfessionalController = new CreateProfessionalControler(
-  createProfessionalUseCase,
-);
+  const createProfessionalController = new CreateProfessionalController(
+    createProfessionalUseCase,
+  );
 
-export { createProfessionalController };
+  return createProfessionalController;
+};

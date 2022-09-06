@@ -10,20 +10,30 @@ interface IRequest {
 
 class CreatePatientUseCase {
   constructor(private patientsRepository: IPatientsRepository) {}
-  execute({ nome, cpf, email, genero, dataNascimento }: IRequest): void {
-    const patientNameAlreadyExists = this.patientsRepository.findByName(nome);
+  async execute({
+    nome,
+    cpf,
+    email,
+    genero,
+    dataNascimento,
+  }: IRequest): Promise<void> {
+    const patientNameAlreadyExists = await this.patientsRepository.findByName(
+      nome,
+    );
 
     if (patientNameAlreadyExists) {
       throw new Error('Paciente já cadastrado!');
     }
 
-    const patientCpfAlreadyExists = this.patientsRepository.findByCpf(cpf);
+    const patientCpfAlreadyExists = await this.patientsRepository.findByCpf(
+      cpf,
+    );
 
     if (patientCpfAlreadyExists) {
       throw new Error('Pacient já cadastrado!');
     }
 
-    this.patientsRepository.create({
+    await this.patientsRepository.create({
       nome,
       cpf,
       email,

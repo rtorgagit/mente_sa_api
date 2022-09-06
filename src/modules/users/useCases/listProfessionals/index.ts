@@ -2,12 +2,14 @@ import { ProfessionalsRepository } from '../../repositories/implementations/Prof
 import { ListProfessionalsController } from './ListProfessionalsController';
 import { ListProfessionalsUseCase } from './ListProfessionalsUseCase';
 
-const professionalsRepository = ProfessionalsRepository.getInstance();
-const listProfessionalUseCase = new ListProfessionalsUseCase(
-  professionalsRepository,
-);
-const listProfessionalsController = new ListProfessionalsController(
-  listProfessionalUseCase,
-);
+export default (): ListProfessionalsController => {
+  const professionalsRepository = new ProfessionalsRepository();
+  const listProfessionalUseCase = new ListProfessionalsUseCase(
+    professionalsRepository,
+  );
+  const listProfessionalsController = new ListProfessionalsController(
+    listProfessionalUseCase,
+  );
 
-export { listProfessionalsController };
+  return listProfessionalsController;
+};
