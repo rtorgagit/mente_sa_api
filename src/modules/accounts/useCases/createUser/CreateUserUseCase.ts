@@ -1,3 +1,4 @@
+import { hash } from 'bcryptjs';
 import { inject, injectable } from 'tsyringe';
 
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
@@ -19,7 +20,13 @@ class CreateUserUseCase {
       throw new Error('Usuário já cadastrado!');
     }
 
-    await this.usersRepository.create({ nome, email, password });
+    const passwordHash = await hash(password, 8);
+
+    await this.usersRepository.create({
+      nome,
+      email,
+      password: passwordHash,
+    });
   }
 }
 
