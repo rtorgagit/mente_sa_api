@@ -36,7 +36,7 @@ class CreatePatientUseCase {
     );
 
     if (patientCpfAlreadyExists) {
-      throw new Error('Pacient já cadastrado!');
+      throw new Error('Paciente já cadastrado!');
     }
 
     await this.patientsRepository.create({

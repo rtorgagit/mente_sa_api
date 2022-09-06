@@ -1,5 +1,7 @@
 import { container } from 'tsyringe';
 
+import { UsersRepository } from '../../modules/accounts/repositories/implementations/UsersRepository';
+import { IUsersRepository } from '../../modules/accounts/repositories/IUsersRepository';
 import { PatientsRepository } from '../../modules/users/repositories/implementations/PatientsRepository';
 import { ProfessionalsRepository } from '../../modules/users/repositories/implementations/ProfessionalsRepository';
 import { IPatientsRepository } from '../../modules/users/repositories/IPatientsRepository';
@@ -13,4 +15,9 @@ container.registerSingleton<IProfessionalsRepository>(
 container.registerSingleton<IPatientsRepository>(
   'PatientsRepository',
   PatientsRepository,
+);
+
+container.registerSingleton<IUsersRepository>(
+  'UsersRepository',
+  UsersRepository,
 );
