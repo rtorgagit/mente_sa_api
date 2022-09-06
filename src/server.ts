@@ -6,6 +6,7 @@ import swaggerFile from './swagger.json';
 
 const app = express();
 app.use(express.json());
+console.log('Reload funcionando');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
