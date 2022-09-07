@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '../../../../errors/AppError';
 import { IPatientsRepository } from '../../repositories/IPatientsRepository';
 
 interface IRequest {
@@ -28,7 +29,7 @@ class CreatePatientUseCase {
     );
 
     if (patientNameAlreadyExists) {
-      throw new Error('Paciente já cadastrado!');
+      throw new AppError('Paciente já cadastrado!');
     }
 
     const patientCpfAlreadyExists = await this.patientsRepository.findByCpf(
@@ -36,7 +37,7 @@ class CreatePatientUseCase {
     );
 
     if (patientCpfAlreadyExists) {
-      throw new Error('Paciente já cadastrado!');
+      throw new AppError('Paciente já cadastrado!');
     }
 
     await this.patientsRepository.create({

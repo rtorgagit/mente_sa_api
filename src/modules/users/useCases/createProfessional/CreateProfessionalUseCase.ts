@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '../../../../errors/AppError';
 import { IProfessionalsRepository } from '../../repositories/IProfessionalsRepository';
 
 interface IRequest {
@@ -21,14 +22,14 @@ class CreateProfessionalUseCase {
       await this.professionalsRepository.findByName(nome);
 
     if (professionalNameAlreadyExists) {
-      throw new Error('Profissional já cadastrado!');
+      throw new AppError('Profissional já cadastrado!', 400);
     }
 
     const professionalCrpAlreadyExists =
       await this.professionalsRepository.findByCrp(crp);
 
     if (professionalCrpAlreadyExists) {
-      throw new Error('Profissional já cadastrado!');
+      throw new AppError('Profissional já cadastrado!', 400);
     }
 
     await this.professionalsRepository.create({
