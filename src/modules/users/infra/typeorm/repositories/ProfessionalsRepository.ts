@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 
-import { Professional } from '@modules/users/entities/Professional';
+import { Professional } from '@modules/users/infra/typeorm/entities/Professional';
 import {
   ICreateProfessionalDTO,
   IProfessionalsRepository,

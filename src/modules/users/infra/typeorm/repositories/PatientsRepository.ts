@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 
-import { Patient } from '@modules/users/entities/Patient';
+import { Patient } from '@modules/users/infra/typeorm/entities/Patient';
 import {
   ICreatePatientDTO,
   IPatientsRepository,
