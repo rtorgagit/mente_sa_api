@@ -1,10 +1,10 @@
 import { getRepository, Repository } from 'typeorm';
 
-import { Professional } from '../../entities/Professional';
+import { Professional } from '@modules/users/entities/Professional';
 import {
   ICreateProfessionalDTO,
   IProfessionalsRepository,
-} from '../IProfessionalsRepository';
+} from '@modules/users/repositories/IProfessionalsRepository';
 
 class ProfessionalsRepository implements IProfessionalsRepository {
   private repository: Repository<Professional>;

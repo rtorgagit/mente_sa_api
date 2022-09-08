@@ -1,4 +1,4 @@
-import { Patient } from '../entities/Patient';
+import { Patient } from '@modules/users/entities/Patient';
 
 interface ICreatePatientDTO {
   nome: string;

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { CreateProfessionalController } from '../modules/users/useCases/createProfessional/CreateProfessionalController';
-import { ListProfessionalsController } from '../modules/users/useCases/listProfessionals/ListProfessionalsController';
+import { CreateProfessionalController } from '@modules/users/useCases/createProfessional/CreateProfessionalController';
+import { ListProfessionalsController } from '@modules/users/useCases/listProfessionals/ListProfessionalsController';
 
 const professionalsRoutes = Router();
 

@@ -1,4 +1,4 @@
-import { Professional } from '../entities/Professional';
+import { Professional } from '@modules/users/entities/Professional';
 
 interface ICreateProfessionalDTO {
   nome: string;

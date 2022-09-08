@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
-import { Professional } from '../../entities/Professional';
-import { IProfessionalsRepository } from '../../repositories/IProfessionalsRepository';
+import { Professional } from '@modules/users/entities/Professional';
+import { IProfessionalsRepository } from '@modules/users/repositories/IProfessionalsRepository';
 
 @injectable()
 class ListProfessionalsUseCase {
